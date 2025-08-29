@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>篮球约球 - 首页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tdesign-icons@0.1.0/tdesign-icons.min.css" rel="stylesheet">
+    <style>
+        .map-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .venue-marker {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航栏 -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span class="text-white text-sm font-bold">篮</span>
+                </div>
+                <h1 class="text-lg font-semibold text-gray-900">篮球约球</h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="p-2 text-gray-500 hover:text-gray-700 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z"></path>
+                    </svg>
+                </button>
+                <button class="p-2 text-gray-500 hover:text-gray-700 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 地图容器 -->
+    <div class="map-container relative h-96">
+        <!-- 地图背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-600"></div>
+        
+        <!-- 用户位置标记 -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
+            <div class="w-8 h-8 bg-blue-500 bg-opacity-20 rounded-full -mt-2 -ml-2 animate-ping"></div>
+        </div>
+
+        <!-- 篮球场标记 -->
+        <div class="venue-marker absolute top-20 left-16">
+            <div class="w-6 h-6 bg-orange-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center">
+                <span class="text-white text-xs">🏀</span>
+            </div>
+            <div class="absolute top-8 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg px-3 py-2 text-sm whitespace-nowrap">
+                <div class="font-medium">星光篮球场</div>
+                <div class="text-gray-500 text-xs">距离: 0.5km</div>
+            </div>
+        </div>
+
+        <div class="venue-marker absolute top-32 right-20">
+            <div class="w-6 h-6 bg-orange-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center">
+                <span class="text-white text-xs">🏀</span>
+            </div>
+            <div class="absolute top-8 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg px-3 py-2 text-sm whitespace-nowrap">
+                <div class="font-medium">社区篮球场</div>
+                <div class="text-gray-500 text-xs">距离: 0.8km</div>
+            </div>
+        </div>
+
+        <div class="venue-marker absolute bottom-24 left-1/2 transform -translate-x-1/2">
+            <div class="w-6 h-6 bg-orange-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center">
+                <span class="text-white text-xs">🏀</span>
+            </div>
+            <div class="absolute top-8 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg px-3 py-2 text-sm whitespace-nowrap">
+                <div class="font-medium">体育中心</div>
+                <div class="text-gray-500 text-xs">距离: 1.2km</div>
+            </div>
+        </div>
+
+        <!-- 地图控制按钮 -->
+        <div class="absolute bottom-4 right-4 space-y-2">
+            <button class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:bg-gray-50">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                </svg>
+            </button>
+            <button class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:bg-gray-50">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <button class="w-10 h-10 bg-blue-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-blue-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 底部功能区域 -->
+    <div class="bg-white border-t border-gray-200">
+        <div class="max-w-md mx-auto px-4 py-4">
+            <!-- 快速操作按钮 -->
+            <div class="flex space-x-3 mb-4">
+                <button class="flex-1 bg-blue-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    发布约球
+                </button>
+                <button class="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    搜索场馆
+                </button>
+            </div>
+
+            <!-- 附近约球信息 -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-medium text-gray-900">附近约球</h3>
+                
+                <!-- 约球卡片 -->
+                <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="text-sm font-medium text-gray-900">星光篮球场</span>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">进行中</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">
+                                <span>今天 19:00-21:00</span>
+                                <span class="mx-2">•</span>
+                                <span>还差2人</span>
+                            </div>
+                            <div class="text-xs text-gray-500">备注：欢迎新手，一起打球！</div>
+                        </div>
+                        <button class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors">
+                            加入
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="text-sm font-medium text-gray-900">社区篮球场</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">招募中</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">
+                                <span>明天 14:00-16:00</span>
+                                <span class="mx-2">•</span>
+                                <span>还差3人</span>
+                            </div>
+                            <div class="text-xs text-gray-500">备注：半场3v3，水平不限</div>
+                        </div>
+                        <button class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors">
+                            加入
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div class="max-w-md mx-auto px-4 py-2">
+            <div class="flex justify-around">
+                <a href="index.html" class="flex flex-col items-center py-2 text-blue-500">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span class="text-xs">地图</span>
+                </a>
+                <a href="venue.html" class="flex flex-col items-center py-2 text-gray-400">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    <span class="text-xs">场馆</span>
+                </a>
+                <a href="create.html" class="flex flex-col items-center py-2 text-gray-400">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <span class="text-xs">发布</span>
+                </a>
+                <a href="#" class="flex flex-col items-center py-2 text-gray-400">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    <span class="text-xs">我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟地图交互
+        document.querySelectorAll('.venue-marker').forEach(marker => {
+            marker.addEventListener('click', function() {
+                window.location.href = 'venue.html';
+            });
+        });
+
+        // 模拟加入约球
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('加入')) {
+                button.addEventListener('click', function() {
+                    this.textContent = '已加入';
+                    this.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                    this.classList.add('bg-gray-400', 'cursor-not-allowed');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
