@@ -1,0 +1,227 @@
+/* 表单容器 */
+.form-container {
+  padding: 32rpx;
+  height: calc(100vh - 88rpx - env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+}
+
+/* 表单部分 */
+.form-section {
+  margin-bottom: 40rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.05);
+}
+
+/* 部分标题 */
+.section-title {
+  display: block;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 24rpx;
+  font-size: 32rpx;
+}
+
+/* 场馆选择器 */
+.venue-selector {
+  background-color: #ffffff;
+}
+
+.venue-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.venue-item.selected {
+  background: #E8F3FF;
+  border-color: #0052D9;
+}
+
+.venue-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: #0052D9;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 40rpx;
+  margin-right: 24rpx;
+}
+
+.venue-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.venue-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.venue-address {
+  font-size: 24rpx;
+  color: #888888;
+}
+
+.venue-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-outer {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-outer.selected {
+  border-color: #0052D9;
+}
+
+.radio-inner {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: #0052D9;
+}
+
+/* 时间选项 */
+.time-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.time-option {
+  padding: 16rpx 12rpx;
+  border: 2rpx solid #d1d5db;
+  border-radius: 16rpx;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 28rpx;
+  white-space: pre-line;
+  line-height: 1.3;
+}
+
+.time-option:hover {
+  border-color: #0052D9;
+  background: #E8F3FF;
+}
+
+.time-option.selected {
+  border-color: #0052D9;
+  background: #0052D9;
+  color: white;
+}
+
+/* 选择器内容 */
+.picker-content {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+/* 内联滚轮选择器 */
+.inline-picker {
+  height: 320rpx; /* 固定高度，确保可滚动区域 */
+  background: #fafafa;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.picker-item {
+  height: 80rpx; /* 与 indicator-style 对齐 */
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 技能标签 */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.skill-tag {
+  padding: 12rpx 24rpx;
+  border: 2rpx solid #d1d5db;
+  border-radius: 40rpx;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 24rpx;
+}
+
+.skill-tag:hover {
+  border-color: #0052D9;
+  background: #E8F3FF;
+}
+
+.skill-tag.selected {
+  border-color: #0052D9;
+  background: #0052D9;
+  color: white;
+}
+
+/* 备注信息 */
+.notes-textarea {
+  width: 100%;
+  min-height: 200rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+}
+
+/* 设置列表 */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+/* 发布按钮 */
+.publish-section {
+  padding: 40rpx 0;
+  padding-bottom: 200rpx;
+}
+
+/* 底部导航栏间距 */
+.t-tab-bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000;
+  margin-bottom: env(safe-area-inset-bottom);
+}

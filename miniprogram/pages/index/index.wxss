@@ -1,62 +1,64 @@
-/**index.wxss**/
-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
+/* 容器样式 */
+.location-container {
+  padding: 12rpx 32rpx;
+  background-color: #ffffff;
 }
 
-.userinfo {
+.location-info {
   display: flex;
   flex-direction: column;
+}
+
+.info-item {
+  display: flex;
   align-items: center;
-  color: #aaa;
-  width: 80%;
+  justify-content: space-between;
+  padding: 16rpx 0;
 }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.label {
+  color: #888888;
+  font-size: 28rpx;
 }
 
-.usermotto {
-  margin-top: 200px;
+.value {
+  color: #333333;
+  font-size: 28rpx;
+  font-weight: 500;
 }
 
-.avatar-wrapper {
-  padding: 0;
-  width: 56px !important;
-  border-radius: 8px;
-  margin-top: 40px;
-  margin-bottom: 40px;
+.error-message {
+  padding: 16rpx;
+  background-color: #fff2f0;
+  border-radius: 8rpx;
+  color: #fa5151;
+  font-size: 28rpx;
+  line-height: 1.5;
 }
 
-.avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
-}
-
-.nickname-wrapper {
+.loading-container {
   display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 0;
+}
+
+.loading-text {
+  color: #888888;
+  font-size: 28rpx;
+}
+
+/* 按钮容器 */
+.button-container {
+  padding: 12rpx 32rpx;
+  background-color: #ffffff;
+  z-index: 100;
+  position: relative;
+}
+
+/* 地图容器 */
+.map-container {
   width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-top: .5px solid rgba(0, 0, 0, 0.1);
-  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
-  color: black;
-}
-
-.nickname-label {
-  width: 105px;
-}
-
-.nickname-input {
-  flex: 1;
+  height: calc(100vh - 220rpx);
+  position: relative;
 }

@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="location-card">
+    <view class="card-header">
+      <view class="title">当前位置信息</view>
+      <t-icon wx:if="{{locationSuccess}}" name="check-circle-filled" size="48rpx" color="#07c160" />
+      <t-icon wx:elif="{{locationError}}" name="error-circle-filled" size="48rpx" color="#fa5151" />
+    </view>
+    
+    <view class="location-info" wx:if="{{locationSuccess}}">
+      <view class="info-item">
+        <view class="label">纬度</view>
+        <view class="value">{{latitude}}</view>
+      </view>
+      <view class="info-item">
+        <view class="label">经度</view>
+        <view class="value">{{longitude}}</view>
+      </view>
+      <view class="info-item">
+        <view class="label">精确度</view>
+        <view class="value">{{accuracy}} 米</view>
+      </view>
+      <view class="info-item" wx:if="{{speed !== null}}">
+        <view class="label">速度</view>
+        <view class="value">{{speed}} m/s</view>
+      </view>
+    </view>
+    
+    <view class="error-message" wx:if="{{locationError}}">
+      <text>{{errorMessage}}</text>
+    </view>
+    
+    <view class="loading-container" wx:if="{{loading}}">
+      <t-loading theme="circular" size="80rpx" />
+      <text class="loading-text">定位中...</text>
+    </view>
+  </view>
+  
+  <t-button theme="primary" size="large" icon="location" block bindtap="getLocation" disabled="{{loading}}">
+    {{locationSuccess ? '重新获取位置' : '获取当前位置'}}
+  </t-button>
+</view>

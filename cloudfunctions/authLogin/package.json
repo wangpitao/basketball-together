@@ -1,0 +1,11 @@
+{
+  "name": "authLogin",
+  "version": "1.0.0",
+  "description": "Cloud function to create/find user by openid",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "^3.0.0"
+  }
+}
+
+

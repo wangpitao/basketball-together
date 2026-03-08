@@ -1,13 +1,58 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/venue/venue",
+    "pages/create/create",
+    "pages/message/detail",
+    "pages/mypublish/mypublish",
+    "pages/myjoin/myjoin",
+    "pages/mine/mine",
     "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "篮球约球",
     "navigationBarBackgroundColor": "#ffffff"
   },
+  "cloud": true,
   "componentFramework": "glass-easel",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#0052D9",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "地图",
+        "iconPath": "assets/tabbar/location.png",
+        "selectedIconPath": "assets/tabbar/location-active.png"
+      },
+      {
+        "pagePath": "pages/venue/venue",
+        "text": "场馆",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/tabbar/user.png",
+        "selectedIconPath": "assets/tabbar/user-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userFuzzyLocation": {
+      "desc": "你的大致位置信息将用于附近球馆检索和地图展示"
+    }
+  },
+  "requiredPrivateInfos": [
+    "choosePoi",
+    "getFuzzyLocation"
+  ]
 }

@@ -1,0 +1,33 @@
+.page {
+  padding: 16px;
+}
+.header {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.loading, .empty {
+  color: #666;
+}
+.list {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+.list-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.list-item:last-child {
+  border-bottom: none;
+}
+.list-title {
+  font-size: 14px;
+  color: #111827;
+  margin-bottom: 6px;
+}
+.list-sub {
+  font-size: 12px;
+  color: #6b7280;
+}

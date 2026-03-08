@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的 - 篮球约球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tdesign-icons-web@0.2.3/styles/index.css">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        /* iPhone 15 尺寸 (393x852px) */
+        .phone-container { width: 393px; height: 852px; margin: 0 auto; border: 8px solid #1f2937; border-radius: 44px; overflow: hidden; position: relative; background: #f8fafc; }
+        .profile-header { background: linear-gradient(135deg, #0052D9 0%, #5E7CE0 100%); color: white; padding: 20px; text-align: center; }
+        .avatar { width: 80px; height: 80px; border-radius: 9999px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 32px; border: 3px solid rgba(255,255,255,0.3); }
+        .menu-item { background: white; border-radius: 12px; padding: 16px; margin: 8px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.2s; }
+        .menu-item:hover { background: #f9fafb; transform: translateY(-1px); }
+        .menu-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
+        .icon-blue { background: #0052D9; }
+        .icon-green { background: #00A870; }
+        .icon-purple { background: #9C27B0; }
+        .icon-orange { background: #ED7B2F; }
+        .icon-red { background: #E34D59; }
+        .btn-primary { background: #0052D9; color: white; padding: 12px 24px; border-radius: 12px; border: none; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .btn-primary:hover { background: #0045B3; transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: #6b7280; padding: 8px 16px; border-radius: 8px; border: 1px solid #d1d5db; font-weight: 500; cursor: pointer; transition: all 0.2s; font-size: 12px; }
+        .btn-outline:hover { background: #f9fafb; border-color: #9ca3af; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+        .stat-item { background: white; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }
+        .stat-number { font-size: 24px; font-weight: 700; color: #0052D9; margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: #6b7280; }
+        .tab-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 393px; background: white; border-top: 1px solid #e5e7eb; display: flex; padding: 8px 0; }
+        .tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px; cursor: pointer; transition: all 0.2s; }
+        .tab-item.active { color: #0052D9; }
+        .tab-item:hover { color: #0052D9; }
+        .tab-icon { font-size: 20px; margin-bottom: 4px; }
+        .tab-text { font-size: 12px; font-weight: 500; }
+        .login-prompt { background: white; border-radius: 16px; padding: 24px; margin: 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }
+        .login-icon { width: 64px; height: 64px; background: #f3f4f6; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; color: #9ca3af; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="phone-container">
+        <!-- 用户信息头部 -->
+        <div class="profile-header" id="profile-header">
+            <div class="avatar" id="user-avatar">👤</div>
+            <h2 class="text-xl font-bold mb-2" id="user-name">请登录</h2>
+            <p class="text-blue-100 mb-4" id="user-desc">登录后使用完整功能</p>
+            <button class="btn-primary" id="login-btn">微信登录</button>
+        </div>
+
+        <!-- 登录提示（未登录时显示） -->
+        <div class="login-prompt" id="login-prompt">
+            <div class="login-icon">🔐</div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">登录后享受更多功能</h3>
+            <p class="text-sm text-gray-600 mb-4">发布约球、查看历史、接收提醒等</p>
+            <button class="btn-primary" onclick="document.getElementById('login-btn').click()">立即登录</button>
+        </div>
+
+        <!-- 用户统计（登录后显示） -->
+        <div class="px-4 py-4" id="user-stats" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">发布次数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">28</div>
+                    <div class="stat-label">参与次数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-label">信用评分</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能菜单 -->
+        <div class="px-4 py-2">
+            <!-- 我的活动 -->
+            <div class="menu-item" onclick="showFeature('我的发布')">
+                <div class="menu-icon icon-blue">
+                    <span class="t-icon t-icon-edit"></span>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900">我的发布</div>
+                    <div class="text-sm text-gray-500">查看我发布的约球信息</div>
+                </div>
+                <span class="t-icon t-icon-chevron-right text-gray-400"></span>
+            </div>
+
+            <div class="menu-item" onclick="showFeature('我的参与')">
+                <div class="menu-icon icon-green">
+                    <span class="t-icon t-icon-user"></span>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900">我的参与</div>
+                    <div class="text-sm text-gray-500">查看我加入的约球活动</div>
+                </div>
+                <span class="t-icon t-icon-chevron-right text-gray-400"></span>
+            </div>
+
+            <div class="menu-item" onclick="showFeature('约球历史')">
+                <div class="menu-icon icon-purple">
+                    <span class="t-icon t-icon-time"></span>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900">约球历史</div>
+                    <div class="text-sm text-gray-500">查看历史约球记录</div>
+                </div>
+                <span class="t-icon t-icon-chevron-right text-gray-400"></span>
+            </div>
+
+            <!-- 设置与帮助 -->
+            <div class="menu-item" onclick="showFeature('消息提醒')">
+                <div class="menu-icon icon-orange">
+                    <span class="t-icon t-icon-notification"></span>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900">消息提醒</div>
+                    <div class="text-sm text-gray-500">管理约球提醒设置</div>
+                </div>
+                <span class="t-icon t-icon-chevron-right text-gray-400"></span>
+            </div>
+
+            <div class="menu-item" onclick="showFeature('意见反馈')">
+                <div class="menu-icon icon-red">
+                    <span class="t-icon t-icon-help-circle"></span>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900">意见反馈</div>
+                    <div class="text-sm text-gray-500">提交建议或报告问题</div>
+                </div>
+                <span class="t-icon t-icon-chevron-right text-gray-400"></span>
+            </div>
+
+            <div class="menu-item" onclick="showFeature('关于我们')">
+                <div class="menu-icon icon-blue">
+                    <span class="t-icon t-icon-info-circle"></span>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900">关于我们</div>
+                    <div class="text-sm text-gray-500">版本信息与联系方式</div>
+                </div>
+                <span class="t-icon t-icon-chevron-right text-gray-400"></span>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="tab-item" data-tab="index">
+                <div class="tab-icon t-icon t-icon-location"></div>
+                <div class="tab-text">地图</div>
+            </div>
+            <div class="tab-item" data-tab="venue">
+                <div class="tab-icon t-icon t-icon-building"></div>
+                <div class="tab-text">场馆</div>
+            </div>
+            <div class="tab-item" data-tab="create">
+                <div class="tab-icon t-icon t-icon-add"></div>
+                <div class="tab-text">发布</div>
+            </div>
+            <div class="tab-item active" data-tab="mine">
+                <div class="tab-icon t-icon t-icon-user"></div>
+                <div class="tab-text">我的</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isLoggedIn = false;
+
+        // 微信登录模拟
+        document.getElementById('login-btn').addEventListener('click', function() {
+            // 模拟登录成功
+            isLoggedIn = true;
+            
+            // 更新用户信息
+            document.getElementById('user-avatar').textContent = '🏀';
+            document.getElementById('user-name').textContent = '张同学';
+            document.getElementById('user-desc').textContent = '已绑定手机号 138****8888';
+            
+            // 隐藏登录按钮，显示绑定手机号按钮
+            this.style.display = 'none';
+            const bindPhoneBtn = document.createElement('button');
+            bindPhoneBtn.className = 'btn-outline';
+            bindPhoneBtn.textContent = '绑定手机号';
+            bindPhoneBtn.onclick = bindPhone;
+            this.parentNode.appendChild(bindPhoneBtn);
+            
+            // 显示用户统计
+            document.getElementById('user-stats').style.display = 'block';
+            document.getElementById('login-prompt').style.display = 'none';
+            
+            console.log('登录成功');
+        });
+
+        // 绑定手机号
+        function bindPhone() {
+            alert('跳转到手机号绑定页面');
+            console.log('绑定手机号');
+        }
+
+        // 功能菜单点击
+        function showFeature(feature) {
+            if (!isLoggedIn) {
+                alert('请先登录');
+                return;
+            }
+            console.log('点击功能:', feature);
+            alert(`功能：${feature}\n（此功能正在开发中）`);
+        }
+
+        // 底部导航切换
+        document.querySelectorAll('.tab-item').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                const target = this.getAttribute('data-tab');
+                
+                // 移除所有active状态
+                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                // 添加当前active状态
+                this.classList.add('active');
+                
+                // 页面跳转
+                if (target === 'index') {
+                    window.location.href = 'index.html';
+                } else if (target === 'venue') {
+                    window.location.href = 'venue.html';
+                } else if (target === 'create') {
+                    window.location.href = 'create.html';
+                }
+            });
+        });
+
+        // 模拟用户数据更新
+        setInterval(function() {
+            if (isLoggedIn) {
+                // 随机更新统计数据
+                const statNumbers = document.querySelectorAll('.stat-number');
+                statNumbers.forEach(function(stat, index) {
+                    if (index === 0) { // 发布次数
+                        const current = parseInt(stat.textContent);
+                        if (Math.random() > 0.8) { // 20%概率增加
+                            stat.textContent = current + 1;
+                        }
+                    }
+                });
+            }
+        }, 60000); // 每分钟检查一次
+    </script>
+</body>
+</html>

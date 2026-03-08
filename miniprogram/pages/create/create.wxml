@@ -1,0 +1,108 @@
+<!-- 顶部导航栏 -->
+<t-navbar title="发布约球" left-arrow bindleftclick="goBack" />
+
+<!-- 表单内容 -->
+<scroll-view scroll-y class="form-container">
+  <!-- 选择场馆（仅显示当前选择，不展示列表） -->
+  <view class="form-section venue-selector">
+    <text class="section-title">选择场馆</text>
+    <view class="venue-item selected" bindtap="chooseVenuePoi">
+      <view class="venue-icon">🏀</view>
+      <view class="venue-details">
+        <text class="venue-name">{{venueName}}</text>
+        <text class="venue-address">{{selectedVenueAddress || '从场馆详情页选择'}}</text>
+      </view>
+      <view class="venue-action">
+        <text class="change-text">更换</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 选择时间（内联选择器） -->
+  <view class="form-section">
+    <text class="section-title">选择时间</text>
+    <picker-view class="inline-picker" indicator-style="height: 80rpx;" value="{{[dateIndex]}}" bindchange="onDatePickerChange" catchtouchmove="onPickerTouchMove">
+      <picker-view-column>
+        <view wx:for="{{dateList}}" wx:key="*this" class="picker-item">{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+
+    <picker-view class="inline-picker" indicator-style="height: 80rpx;" value="{{[hourIndex, minuteIndex]}}" bindchange="onTimePickerChange" catchtouchmove="onPickerTouchMove">
+      <picker-view-column>
+        <view wx:for="{{hourList}}" wx:key="*this" class="picker-item">{{item}} 时</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{minuteList}}" wx:key="*this" class="picker-item">{{item}} 分</view>
+      </picker-view-column>
+    </picker-view>
+    <view class="selected-datetime" wx:if="{{customDate && customTime}}">
+      已选择：{{customDate}} {{customTime}}
+    </view>
+  </view>
+
+  <!-- 选择人数（内联选择器） -->
+  <view class="form-section">
+    <text class="section-title">需要人数</text>
+    <picker-view class="inline-picker" indicator-style="height: 80rpx;" value="{{[playerCountIndex]}}" bindchange="onPlayerPickerChange" catchtouchmove="onPickerTouchMove">
+      <picker-view-column>
+        <view wx:for="{{playerCountOptions}}" wx:key="value" class="picker-item">{{item.label}}</view>
+      </picker-view-column>
+    </picker-view>
+    <view class="selected-players">
+      已选择：{{playerCountOptions[playerCountIndex].label}}
+    </view>
+  </view>
+
+  <!-- 技术水平 -->
+  <view class="form-section">
+    <text class="section-title">技术水平要求</text>
+    <view class="skill-tags">
+      <view 
+        wx:for="{{skillOptions}}" 
+        wx:key="value"
+        class="skill-tag {{item.selected ? 'selected' : ''}}"
+        bindtap="selectSkill"
+        data-value="{{item.value}}"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注信息 -->
+  <view class="form-section">
+    <text class="section-title">备注信息</text>
+    <t-textarea 
+      value="{{notes}}"
+      placeholder="请描述约球详情，如：欢迎新手、半场3v3、全场5v5等..."
+      maxlength="{{200}}"
+      disableDefaultPadding="{{true}}"
+      indicator
+      bindchange="onNotesChange"
+      class="notes-textarea"
+    />
+  </view>
+
+  <!-- 其他设置（隐藏，默认公开可见） -->
+  <view class="form-section" wx:if="{{false}}">
+    <text class="section-title">其他设置</text>
+    <view class="settings-list">
+      <view class="setting-item">
+        <text>开启提醒</text>
+        <t-switch value="{{reminderEnabled}}" bindchange="onReminderChange" />
+      </view>
+      <view class="setting-item">
+        <text>公开可见</text>
+        <t-switch value="{{publicVisible}}" bindchange="onPublicChange" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 发布按钮 -->
+  <view class="publish-section">
+    <t-button theme="primary" size="large" block bindtap="publishGame">
+      发布约球
+    </t-button>
+  </view>
+</scroll-view>
+

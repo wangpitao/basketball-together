@@ -1,0 +1,11 @@
+{
+  "name": "listVenueMessages",
+  "version": "1.0.0",
+  "description": "Cloud function to list venue messages",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "^3.0.0"
+  }
+}
+
+

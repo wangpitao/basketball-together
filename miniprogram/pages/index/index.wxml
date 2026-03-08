@@ -1,28 +1,42 @@
-<!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+<!-- 位置信息 -->
+<view class="location-container">
+  <view class="location-info" wx:if="{{locationSuccess}}">
+    <view class="info-item">
+      <view class="label">当前位置</view>
+      <view class="value">{{latitude}}, {{longitude}}</view>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
-    <t-button theme="primary">按钮</t-button>
   </view>
-</scroll-view>
+  
+  <view class="error-message" wx:if="{{locationError}}">
+    <text>{{errorMessage}}</text>
+  </view>
+  
+  <view class="loading-container" wx:if="{{loading}}">
+    <t-loading theme="circular" size="40rpx" />
+    <text class="loading-text">定位中...</text>
+  </view>
+</view>
+
+<!-- 获取位置按钮 -->
+<view class="button-container">
+  <t-button theme="primary" size="large" icon="location" block bindtap="getLocation" disabled="{{loading}}">
+    {{locationSuccess ? '重新获取位置' : '获取当前位置'}}
+  </t-button>
+</view>
+
+<!-- 地图组件 -->
+<view class="map-container">
+  <map
+    id="myMap"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location
+    bindregionchange="onRegionChange"
+    bindcallouttap="onMarkerTap"
+    bindmarkertap="onMarkerTap"
+    style="width: 100%; height: 100%;"
+  ></map>
+</view>
+

@@ -9,4 +9,16 @@ dist
 .DS_Store
 .idea
 .vscode
-.wxml
+
+# WeChat DevTools private config
+project.private.config.json
+
+# Frontend local secret config (do not commit real keys)
+miniprogram/config.ts
+
+# Cloud functions local secrets
+cloudfunctions/**/config.js
+cloudfunctions/**/.env
+
+# Nested node_modules (e.g., in cloudfunctions/*)
+**/node_modules/

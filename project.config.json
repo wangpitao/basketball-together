@@ -1,6 +1,7 @@
 {
   "description": "项目配置文件",
   "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
   "compileType": "miniprogram",
   "setting": {
     "useCompilerPlugins": [
@@ -46,10 +47,11 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "libVersion": "trial",
+  "libVersion": "3.9.3",
   "packOptions": {
     "ignore": [],
     "include": []
   },
-  "appid": "wxab9d5859a5986bb2"
+  "appid": "wxab9d5859a5986bb2",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }

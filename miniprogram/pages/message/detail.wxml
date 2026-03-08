@@ -1,0 +1,33 @@
+<view class="page">
+  <view class="section">
+    <view class="title">{{message.venueName}}</view>
+    <view class="sub">时间：{{displayTime}}｜人数：{{message.maxPlayers}}人</view>
+    <view class="sub">地址：{{message.address || ''}}</view>
+  </view>
+
+  <view class="section">
+    <view class="row">
+      <view>发布人：{{message.authorNickname || '球友'}}</view>
+      <t-button size="small" theme="primary" bindtap="onJoin" loading="{{joining}}" disabled="{{isFull || joined}}">
+        {{isFull ? '已满员' : (joined ? '已加入' : '加入')}}
+      </t-button>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="title small">留言</view>
+    <view class="empty" wx:if="{{!comments.length}}">还没有留言，抢先发一个吧</view>
+    <view class="comment" wx:for="{{comments}}" wx:key="createdAt">
+      <view class="c-head">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+        <view class="name">{{item.nickName}}</view>
+        <view class="time">{{formatTime(item.createdAt)}}</view>
+      </view>
+      <view class="c-content">{{item.content}}</view>
+    </view>
+    <view class="comment-input">
+      <input class="ipt" placeholder="输入留言" value="{{commentText}}" bindinput="onInput" />
+      <t-button size="small" theme="primary" bindtap="onSend" loading="{{sending}}">发送</t-button>
+    </view>
+  </view>
+</view>

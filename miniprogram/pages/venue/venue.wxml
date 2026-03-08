@@ -1,0 +1,94 @@
+<!-- 顶部导航栏 -->
+<t-navbar title="场馆详情" left-arrow bindleftclick="goBack" />
+
+<!-- 场馆头部信息 -->
+<view class="venue-header">
+  <view class="venue-image">
+    🏀
+  </view>
+  
+  <view class="venue-info">
+    <text class="venue-name">{{venueInfo.name}}</text>
+    <text class="venue-address">📍 {{venueInfo.address}}</text>
+  </view>
+  
+  <view class="venue-actions">
+    <t-button theme="primary" size="large" class="action-btn" bindtap="joinGame" icon="user-add">
+      加入约球
+    </t-button>
+    <t-button variant="outline" size="large" class="action-btn" bindtap="goCreate" icon="edit">
+      发布约球
+    </t-button>
+  </view>
+</view>
+
+<!-- 场馆详细信息 -->
+<view class="venue-details">
+  <t-cell-group title="场馆信息" t-class-title="info-title">
+    <t-cell bordered="{{false}}">
+      <view class="info-list">
+        <view class="info-item">
+          <t-icon name="time" color="#0052D9" size="48rpx" />
+          <text>开放时间：{{venueInfo.openTime}}</text>
+        </view>
+        <view class="info-item">
+          <t-icon name="money-circle" color="#00A870" size="48rpx" />
+          <text>收费标准：{{venueInfo.fee}}</text>
+        </view>
+        <view class="info-item">
+          <t-icon name="location" color="#E34D59" size="48rpx" />
+          <text>场地数量：{{venueInfo.courtCount}}</text>
+        </view>
+        <view class="info-item">
+          <t-icon name="star" color="#ED7B2F" size="48rpx" />
+          <text>评分：{{venueInfo.rating}}分 ({{venueInfo.ratingCount}}人评价)</text>
+        </view>
+      </view>
+    </t-cell>
+  </t-cell-group>
+</view>
+
+<!-- 约球留言板 -->
+<view class="message-board">
+  <view class="board-header">
+    <text class="board-title">约球留言板</text>
+    <text class="board-subtitle">实时更新</text>
+  </view>
+  
+  <block wx:for="{{messageList}}" wx:key="id">
+    <t-cell-group class="message-group">
+      <t-cell class="message-item" hover="{{true}}" bindtap="openMessageDetail" data-id="{{item.id}}">
+        <view slot="title" class="message-header">
+          <view class="user-info">
+            <t-avatar size="40rpx" class="user-avatar">{{item.userName[0]}}</t-avatar>
+            <view class="user-details">
+              <text class="user-name">{{item.userName}}</text>
+              <text class="message-time">{{item.timeAgo}}</text>
+            </view>
+          </view>
+          <t-tag theme="{{item.statusTheme}}" variant="light" size="small">{{item.statusText}}</t-tag>
+        </view>
+        <view slot="description" class="message-content">
+          <text class="game-time">{{item.time}} · {{item.remainingText}}</text>
+          <text class="game-remark">{{item.remark}}</text>
+        </view>
+        <view slot="right-icon" class="message-action">
+          <view class="signup-count">已报名：{{item.signupCount}}人</view>
+          <t-button 
+            theme="{{item.isFull ? 'default' : (item.joined ? 'default' : 'primary')}}" 
+            size="small" 
+            data-id="{{item.id}}" 
+            bindtap="joinMessage"
+            disabled="{{item.isFull || item.joined}}"
+          >
+            {{item.isFull ? '已满员' : (item.joined ? '已加入' : '加入')}}
+          </t-button>
+        </view>
+      </t-cell>
+    </t-cell-group>
+  </block>
+  
+  <!-- 无数据提示 -->
+  <t-empty wx:if="{{messageList.length === 0}}" description="暂无约球信息" />
+</view>
+
