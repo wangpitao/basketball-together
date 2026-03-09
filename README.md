@@ -23,12 +23,14 @@
 - `detail.png`（球局详情/留言）
 - `extra.png`（额外示意图，可替换为任意你想展示的页面）
 
+统一尺寸说明：所有示意图按固定宽度展示（宽度 360px，高度自适应）。你可以替换同名文件，README 将自动引用。
+
 <div align="center">
-  <img src="docs/screenshots/map.png" alt="地图页" width="49%" />
-  <img src="docs/screenshots/create.png" alt="发布约球" width="49%" />
-  <img src="docs/screenshots/venue.png" alt="场馆详情" width="49%" />
-  <img src="docs/screenshots/detail.png" alt="球局详情" width="49%" />
-  <img src="docs/screenshots/extra.png" alt="更多页面" width="100%" />
+  <img src="docs/screenshots/map.png" alt="地图页" width="360" />
+  <img src="docs/screenshots/create.png" alt="发布约球" width="360" />
+  <img src="docs/screenshots/venue.png" alt="场馆详情" width="360" />
+  <img src="docs/screenshots/detail.png" alt="球局详情" width="360" />
+  <img src="docs/screenshots/extra.png" alt="更多页面" width="360" />
 </div>
 
 ## 技术栈
@@ -38,6 +40,36 @@
 - **UI组件**: TDesign Mini Program
 - **云服务**: 微信云开发（云数据库、云函数）
 - **地图**: 腾讯地图SDK
+
+## 云开发资源说明
+
+以下为项目使用到的云开发资源（请在你的环境中按需创建，并根据需要设置权限/索引）：
+
+- 云数据库（集合）
+  - `users`: 存储用户档案（昵称、头像URL或`avatarFileID`、手机号`phone`、统计`stats`、时间戳等）。
+  - `messages`: 存储约球信息（场馆`placeId`/`venueName`、时间`gameTime`、参与者`participants`、评论`comments`、过期时间`expireAt`、公开性`isPublic`等）。
+  - `images`: 图片元数据归档（`fileID`、`scene`、`meta`、创建时间等），例如用户头像的存储记录。
+
+- 云存储（对象）
+  - 用户头像文件：通过 `avatarFileID` 与 `users` 文档关联；展示时会临时换取可访问 URL。
+  - 其他业务图片：暂无强制要求，可按需扩展（推荐在 `images` 集合记录元信息）。
+
+- 云函数（名称 — 作用）
+  - `authLogin` — 依据 `openid` 建档/返回用户文档，并在必要时补齐字段。
+  - `createMessage` — 创建一条场馆约球信息（写入 `messages`）。
+  - `listVenueMessages` — 按 `placeId` 拉取有效（未过期）的约球列表。
+  - `getMessageDetail` — 按 `_id` 获取单条约球详情。
+  - `joinMessage` — 原子性加入约球（人数与重复加入校验）。
+  - `listMyMessages` — 拉取“我的发布/我的参与”的约球列表。
+  - `addMessageComment` — 向消息追加评论（带用户昵称与头像处理）。
+  - `getUserStats` — 统计当前用户的发布/参与次数。
+  - `getPhoneNumber` — 解析手机号并写入到 `users`。
+  - `updateUser` — 更新用户资料与统计，并将头像 `fileID` 记录到 `images` 作为元数据归档。
+  - `dedupeUsers` — 清理 `users` 集合中的重复或缺失 `_openid` 的文档。
+
+- 云环境与密钥说明
+  - 小程序前端本地配置请参考 `miniprogram/utils/config.example.ts`，将真实密钥保存在未提交的本地文件中（`config.ts`）。
+  - 云函数内部示例使用了 `cloud.init({ env: '...' })`，请替换为你自己的云环境 ID；如需更安全的配置方式，建议在部署阶段注入环境变量或使用环境别名。
 
 ## 项目结构
 
