@@ -21,12 +21,14 @@
 - `create.png`（发布约球）
 - `venue.png`（场馆详情）
 - `detail.png`（球局详情/留言）
+- `extra.png`（额外示意图，可替换为任意你想展示的页面）
 
 <div align="center">
   <img src="docs/screenshots/map.png" alt="地图页" width="49%" />
   <img src="docs/screenshots/create.png" alt="发布约球" width="49%" />
   <img src="docs/screenshots/venue.png" alt="场馆详情" width="49%" />
   <img src="docs/screenshots/detail.png" alt="球局详情" width="49%" />
+  <img src="docs/screenshots/extra.png" alt="更多页面" width="100%" />
 </div>
 
 ## 技术栈
