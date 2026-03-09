@@ -13,6 +13,22 @@
 - 🔔 **消息提醒**: 订阅约球提醒消息
 - 👤 **用户系统**: 微信登录，个人资料管理
 
+## 示意图
+
+将截图放入 `docs/screenshots/` 目录并使用以下文件名，即可在下方自动展示：
+
+- `map.png`（地图页）
+- `create.png`（发布约球）
+- `venue.png`（场馆详情）
+- `detail.png`（球局详情/留言）
+
+<div align="center">
+  <img src="docs/screenshots/map.png" alt="地图页" width="49%" />
+  <img src="docs/screenshots/create.png" alt="发布约球" width="49%" />
+  <img src="docs/screenshots/venue.png" alt="场馆详情" width="49%" />
+  <img src="docs/screenshots/detail.png" alt="球局详情" width="49%" />
+</div>
+
 ## 技术栈
 
 - **框架**: 微信小程序原生框架

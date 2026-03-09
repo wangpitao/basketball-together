@@ -15,6 +15,7 @@ project.private.config.json
 
 # Frontend local secret config (do not commit real keys)
 miniprogram/config.ts
+miniprogram/utils/config.ts
 
 # Cloud functions local secrets
 cloudfunctions/**/config.js
